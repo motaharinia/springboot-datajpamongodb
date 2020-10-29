@@ -1,4 +1,4 @@
-package com.motaharinia.base;
+package com.motaharinia;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
