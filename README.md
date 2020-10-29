@@ -38,12 +38,13 @@ further references:
 - https://spring.io/projects/spring-data-jpa
 - https://bezkoder.com/spring-boot-mongodb-crud/
 - https://bezkoder.com/spring-boot-mongodb-pagination/
-- https://stackabuse.com/spring-data-mongodb-tutorial/
+- https://stackabuse.com/spring-data-mongodb-adminUser/
 - https://www.mongodb.com/
 - https://www.mongodb.com/try/download/compass
-- https://docs.mongodb.com/manual/tutorial/enable-authentication/
+- https://docs.mongodb.com/manual/adminUser/enable-authentication/
 - https://stackoverflow.com/questions/23515295/spring-boot-and-how-to-configure-connection-details-to-mongodb
 - https://www.tutorialspoint.com/mongodb/mongodb_create_database.htm
+- https://docs.spring.io/spring-data/data-mongo/docs/current/reference/html/#mapping-usage-annotations
 
 
 

@@ -1,4 +1,4 @@
-package com.motaharinia.persistence.orm.tutorial;
+package com.motaharinia.persistence.orm.adminuser;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -8,9 +8,9 @@ import java.util.List;
  * User: https://github.com/motaharinia<br>
  * Date: 2020-10-28 <br>
  * Time: 22:12:23 <br>
- * Description: کلاس ریپازیتوری راهنما
+ * Description: کلاس ریپازیتوری ادمین
  */
-public interface TutorialRepository extends MongoRepository<Tutorial, String> {
+public interface AdminUserRepository extends MongoRepository<AdminUser, String> {
 
     //Now we can use MongoRepository’s methods: save(), findOne(), findById(), findAll(), count(), delete(), deleteById()… without implementing these methods.
     //We also define custom finder methods:
@@ -18,6 +18,6 @@ public interface TutorialRepository extends MongoRepository<Tutorial, String> {
     //– findByPublished(): returns all Tutorials with published having value as input published.
 
 
-    List<Tutorial> findByTitleContaining(String title);
-    List<Tutorial> findByPublished(boolean published);
+    List<AdminUser> findByTitleContaining(String title);
+    List<AdminUser> findByPublished(boolean published);
 }
