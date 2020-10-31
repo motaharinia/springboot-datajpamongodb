@@ -18,6 +18,6 @@ public interface AdminUserRepository extends MongoRepository<AdminUser, String> 
     //– findByPublished(): returns all Tutorials with published having value as input published.
 
 
-    List<AdminUser> findByTitleContaining(String title);
-    List<AdminUser> findByPublished(boolean published);
+    List<AdminUser> findByUsernameLike(String username);
+    List<AdminUser> findByLastNameLike(String lastName);
 }

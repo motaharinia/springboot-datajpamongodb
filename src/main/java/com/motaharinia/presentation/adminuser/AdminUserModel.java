@@ -1,64 +1,56 @@
-package com.motaharinia.persistence.orm.adminuser;
+package com.motaharinia.presentation.adminuser;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.FieldType;
 
-import java.util.Date;
+
+import com.motaharinia.msutility.customfield.CustomDate;
+
+import java.io.Serializable;
 
 
 /**
  * User: https://github.com/motaharinia<br>
- * Date: 2020-10-28 <br>
- * Time: 22:12:23 <br>
- * Description: کلاس کالکشن ادمین
+ * Date: 2020-06-12<br>
+ * Time: 01:05:58<br>
+ * Description:<br>
+ *  کلاس مدل ادمین
  */
-
-@Document(collection = "admin_user")
-public class AdminUser {
+public class AdminUserModel implements Serializable {
     /**
      * شناسه
      */
-    @Id
-    private String  id;
+    private String id;
 
     /**
      * نام کاربری
      */
-    @Field(name = "username")
     private String username;
 
     /**
      * رمز عبور
      */
-    @Field(name = "password")
     private String password;
 
     /**
      * نام
      */
-    @Field(name = "first_name")
     private String firstName;
 
     /**
      * نام خانوادگی
      */
-    @Field(name = "last_name")
     private String lastName;
 
-
     /**
-     *تاریخ تولد
+     * تاریخ تولد
      */
-    @Field(name = "date_of_birth", targetType  = FieldType.DATE_TIME)
-    private Date dateOfBirth;
+    private CustomDate dateOfBirth;
 
 
-    public AdminUser() {
+    public AdminUserModel() {
     }
 
-    public AdminUser(String username, String password, String firstName, String lastName, Date dateOfBirth) {
+    public AdminUserModel(String id,String username, String password, String firstName, String lastName, CustomDate dateOfBirth) {
+        this.setId(id);
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -68,24 +60,24 @@ public class AdminUser {
 
     @Override
     public String toString() {
-        return "AdminUser{" +
+        return "AdminUserModel{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
                 '}';
     }
 
 
     //getter-setter:
 
-    public String  getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(String  id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -121,11 +113,12 @@ public class AdminUser {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
+    public CustomDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(CustomDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+
 }

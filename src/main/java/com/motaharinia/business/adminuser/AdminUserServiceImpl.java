@@ -1,13 +1,18 @@
 package com.motaharinia.business.adminuser;
 
+
+import com.motaharinia.msutility.calendar.CalendarTools;
+import com.motaharinia.msutility.customfield.CustomDate;
 import com.motaharinia.persistence.orm.adminuser.AdminUser;
 import com.motaharinia.persistence.orm.adminuser.AdminUserRepository;
-import com.motaharinia.presentation.controller.adminuser.AdminUserModel;
+import com.motaharinia.presentation.adminuser.AdminUserModel;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +39,7 @@ public class AdminUserServiceImpl implements AdminUserService {
      */
     @Override
     public AdminUserModel create(AdminUserModel adminUserModel) {
-        AdminUser adminUser = adminUserRepository.save(new AdminUser(adminUserModel.getUsername(), adminUserModel.getPassword(), adminUserModel.getFirstName(), adminUserModel.getLastName(), adminUserModel.getDateOfBirth()));
+        AdminUser adminUser = adminUserRepository.save(new AdminUser(adminUserModel.getUsername(), adminUserModel.getPassword(), adminUserModel.getFirstName(), adminUserModel.getLastName(), CalendarTools.getDateFromCustomDate(adminUserModel.getDateOfBirth())));
         adminUserModel.setId(adminUser.getId());
         return adminUserModel;
     }
@@ -46,42 +51,43 @@ public class AdminUserServiceImpl implements AdminUserService {
      * @return خروجی: مدل ادمین جستجو شده متناظر
      */
     @Override
-    public AdminUserModel readById(Integer id) throws Exception {
-        Optional<AdminUser> adminUserOptional = adminUserRepository.findById(id.toString());
+    public AdminUserModel readById(String id) throws Exception {
+        Optional<AdminUser> adminUserOptional = adminUserRepository.findById(id);
+        System.out.println("id:"+id);
         if (adminUserOptional.isEmpty()) {
             throw new Exception("id is not existed");
         }
-        AdminUserModel adminUserModel = new AdminUserModel(adminUserOptional.get().getId(), adminUserOptional.get().getUsername(), adminUserOptional.get().getPassword(), adminUserOptional.get().getFirstName(), adminUserOptional.get().getLastName(), adminUserOptional.get().getDateOfBirth());
+        AdminUserModel adminUserModel = new AdminUserModel(adminUserOptional.get().getId(), adminUserOptional.get().getUsername(), adminUserOptional.get().getPassword(), adminUserOptional.get().getFirstName(), adminUserOptional.get().getLastName(),new CustomDate(adminUserOptional.get().getDateOfBirth()) );
         return adminUserModel;
     }
 
     /**
      * این متد وضعیت انتشار ادمین را دریافت میکند و لیست مدلهای ادمین متناظر را خروجی میدهد
      *
-     * @param published وضعیت انتشار ادمین
+     * @param username وضعیت انتشار ادمین
      * @return خروجی: مدل ادمینهای جستجو شده متناظر
      */
     @Override
-    public List<AdminUserModel> readByPublished(Boolean published) {
+    public List<AdminUserModel> readByUsername(String username) {
         List<AdminUserModel> adminUserModelList = new ArrayList<>();
-        List<AdminUser> adminUserList = adminUserRepository.findByPublished(published);
-        adminUserList.forEach(adminUser -> adminUserModelList.add(new AdminUserModel(adminUser.getId(), adminUser.getUsername(), adminUser.getPassword(), adminUser.getFirstName(), adminUser.getLastName(), adminUser.getDateOfBirth())));
+        List<AdminUser> adminUserList = adminUserRepository.findByUsernameLike(username);
+        adminUserList.forEach(adminUser -> adminUserModelList.add(new AdminUserModel(adminUser.getId(), adminUser.getUsername(), adminUser.getPassword(), adminUser.getFirstName(), adminUser.getLastName(), new CustomDate(adminUser.getDateOfBirth()))));
         return adminUserModelList;
     }
 
     /**
      * این متد عنوان ادمین را دریافت میکند و لیست مدلهای ادمین متناظر را خروجی میدهد
      *
-     * @param title عنوان
+     * @param lastName عنوان
      * @return خروجی: مدل ادمینهای جستجو شده متناظر
      */
     @Override
-    public List<AdminUserModel> readByTitle(String title) {
+    public List<AdminUserModel> readByLastName(String lastName) {
         List<AdminUserModel> adminUserModelList = new ArrayList<>();
-        if (ObjectUtils.isEmpty(title)) {
-            adminUserRepository.findAll().forEach(adminUser -> adminUserModelList.add(new AdminUserModel(adminUser.getId(), adminUser.getUsername(), adminUser.getPassword(), adminUser.getFirstName(), adminUser.getLastName(), adminUser.getDateOfBirth())));
+        if (ObjectUtils.isEmpty(lastName)) {
+            adminUserRepository.findAll().forEach(adminUser -> adminUserModelList.add(new AdminUserModel(adminUser.getId(), adminUser.getUsername(), adminUser.getPassword(), adminUser.getFirstName(), adminUser.getLastName(), new CustomDate(adminUser.getDateOfBirth()) )));
         } else {
-            adminUserRepository.findByTitleContaining(title).forEach(adminUser -> adminUserModelList.add(new AdminUserModel(adminUser.getId(), adminUser.getUsername(), adminUser.getPassword(), adminUser.getFirstName(), adminUser.getLastName(), adminUser.getDateOfBirth())));
+            adminUserRepository.findByLastNameLike(lastName).forEach(adminUser -> adminUserModelList.add(new AdminUserModel(adminUser.getId(), adminUser.getUsername(), adminUser.getPassword(), adminUser.getFirstName(), adminUser.getLastName(), new CustomDate(adminUser.getDateOfBirth()))));
         }
         return adminUserModelList;
     }
@@ -104,7 +110,7 @@ public class AdminUserServiceImpl implements AdminUserService {
         adminUser.setPassword(adminUserModel.getPassword());
         adminUser.setFirstName(adminUserModel.getFirstName());
         adminUser.setLastName(adminUserModel.getLastName());
-        adminUser.setDateOfBirth(adminUserModel.getDateOfBirth());
+        adminUser.setDateOfBirth(CalendarTools.getDateFromCustomDate(adminUserModel.getDateOfBirth()));
 
         return adminUserModel;
     }
@@ -116,13 +122,13 @@ public class AdminUserServiceImpl implements AdminUserService {
      * @return خروجی: مدل ادمین حذف شده
      */
     @Override
-    public AdminUserModel delete(Integer id) throws Exception {
-        Optional<AdminUser> adminUserOptional = adminUserRepository.findById(id.toString());
+    public AdminUserModel delete(String id) throws Exception {
+        Optional<AdminUser> adminUserOptional = adminUserRepository.findById(id);
         if (adminUserOptional.isEmpty()) {
             throw new Exception("id is not existed");
         }
         adminUserRepository.deleteById(id.toString());
-        AdminUserModel adminUserModel = new AdminUserModel(adminUserOptional.get().getId(), adminUserOptional.get().getUsername(), adminUserOptional.get().getPassword(), adminUserOptional.get().getFirstName(), adminUserOptional.get().getLastName(), adminUserOptional.get().getDateOfBirth());
+        AdminUserModel adminUserModel = new AdminUserModel(adminUserOptional.get().getId(), adminUserOptional.get().getUsername(), adminUserOptional.get().getPassword(), adminUserOptional.get().getFirstName(), adminUserOptional.get().getLastName(), new CustomDate(adminUserOptional.get().getDateOfBirth()));
         return adminUserModel;
     }
 }

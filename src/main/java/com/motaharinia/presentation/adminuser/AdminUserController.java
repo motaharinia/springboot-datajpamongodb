@@ -1,4 +1,4 @@
-package com.motaharinia.presentation.controller.adminuser;
+package com.motaharinia.presentation.adminuser;
 
 import com.motaharinia.business.adminuser.AdminUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,18 +28,21 @@ public class AdminUserController {
     }
 
     @GetMapping("/adminUser/{id}")
-    public ResponseEntity<AdminUserModel> readById(@PathVariable("id") Integer id) throws Exception {
-        return new ResponseEntity<>(adminUserService.readById(id), HttpStatus.OK);
+    public ResponseEntity<AdminUserModel> readById(@PathVariable("id") String id) throws Exception {
+        System.out.println("Before Service................");
+        AdminUserModel adminUserModel=adminUserService.readById(id);
+        System.out.println("After Service................");
+        return new ResponseEntity<>(adminUserModel, HttpStatus.OK);
     }
 
-    @GetMapping("/adminUser/published")
-    public ResponseEntity<List<AdminUserModel>> readByPublished() {
-        return new ResponseEntity<>(adminUserService.readByPublished(true), HttpStatus.OK);
+    @GetMapping("/adminUser/username/{username}")
+    public ResponseEntity<List<AdminUserModel>> readByUsername(@PathVariable(required = false) String username) {
+        return new ResponseEntity<>(adminUserService.readByUsername(username), HttpStatus.OK);
     }
 
-    @GetMapping("/adminUser/title/{title}")
-    public ResponseEntity<List<AdminUserModel>> readByTitle(@PathVariable(required = false) String title) {
-        return new ResponseEntity<>(adminUserService.readByTitle(title), HttpStatus.OK);
+    @GetMapping("/adminUser/lastName/{lastName}")
+    public ResponseEntity<List<AdminUserModel>> readByLastName(@PathVariable(required = false) String lastName) {
+        return new ResponseEntity<>(adminUserService.readByLastName(lastName), HttpStatus.OK);
     }
 
 
@@ -48,8 +51,8 @@ public class AdminUserController {
         return new ResponseEntity<>(adminUserService.update(adminUserModel), HttpStatus.OK);
     }
 
-    @DeleteMapping("/adminUsers/{id}")
-    public ResponseEntity<AdminUserModel> delete(@PathVariable("id") Integer id) throws Exception {
+    @DeleteMapping("/adminUser/{id}")
+    public ResponseEntity<AdminUserModel> delete(@PathVariable("id") String id) throws Exception {
         return new ResponseEntity<>(adminUserService.delete(id), HttpStatus.OK);
     }
 

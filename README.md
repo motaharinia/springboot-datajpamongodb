@@ -34,6 +34,17 @@ It is a single record in a MongoDB collection. It can be thought of as a row in 
 - Field:    
 A document has zero or more fields. It's like an RDBMS column having a key-value pair.
 
+### MongoDB 4.0 transactions with Spring Data:
+With MongoDB 4.0, ACID transactions have arrived in the Document store, enforcing all-or-nothing execution and maintaining data integrity. In Version 4.2, Multi-Document transactions supports transaction on replica sets, sharded clusters .
+- When the transaction has committed all data operations on the transaction will commit automatically.
+- If any operation fails, the transaction will fail.
+- When the transaction has failed all data operations on the transaction will roll back automatically.
+- Until transaction committed no write operation data will be exposed to the outside world.
+
+### Application.Properties:
+As long as you use Mongo 2.x, you can specify a host/port as above.
+If you use the Mongo 3.0 Java driver, spring.data.mongodb.host and spring.data.mongodb.port are not supported. In such cases, spring.data.mongodb.uri should be used to provide all of the configuration.
+
 further references:     
 - https://spring.io/projects/spring-data-jpa
 - https://bezkoder.com/spring-boot-mongodb-crud/
@@ -45,7 +56,7 @@ further references:
 - https://stackoverflow.com/questions/23515295/spring-boot-and-how-to-configure-connection-details-to-mongodb
 - https://www.tutorialspoint.com/mongodb/mongodb_create_database.htm
 - https://docs.spring.io/spring-data/data-mongo/docs/current/reference/html/#mapping-usage-annotations
-
+- https://onecompiler.com/posts/3uxxu2z5h/how-to-use-mongodb-transactions-in-spring-boot
 
 
 ### Project Descriptions :

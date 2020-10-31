@@ -1,7 +1,7 @@
 package com.motaharinia.business.adminuser;
 
 
-import com.motaharinia.presentation.controller.adminuser.AdminUserModel;
+import com.motaharinia.presentation.adminuser.AdminUserModel;
 
 import java.util.List;
 
@@ -25,21 +25,21 @@ public interface AdminUserService {
      * @param id شناسه
      * @return خروجی: مدل ادمین جستجو شده متناظر
      */
-    AdminUserModel readById(Integer id) throws Exception;
+    AdminUserModel readById(String id) throws Exception;
 
     /**
-     * این متد وضعیت انتشار ادمین را دریافت میکند و لیست مدلهای ادمین متناظر را خروجی میدهد
-     * @param published وضعیت انتشار ادمین
+     * این متد کلمه کاربری ادمین را دریافت میکند و لیست مدلهای ادمین متناظر را خروجی میدهد
+     * @param username کلمه کاربری ادمین
      * @return خروجی: مدل ادمینهای جستجو شده متناظر
      */
-    List<AdminUserModel> readByPublished(Boolean published);
+    List<AdminUserModel> readByUsername(String username);
 
     /**
-     * این متد عنوان ادمین را دریافت میکند و لیست مدلهای ادمین متناظر را خروجی میدهد
-     * @param title عنوان
+     * این متد نام ادمین را دریافت میکند و لیست مدلهای ادمین متناظر را خروجی میدهد
+     * @param lastName نام
      * @return خروجی: مدل ادمینهای جستجو شده متناظر
      */
-    List<AdminUserModel> readByTitle(String title) ;
+    List<AdminUserModel> readByLastName(String lastName) ;
 
     /**
      * این متد مدل ویرایش را دریافت میکند و آن را ویرایش میکند
@@ -53,5 +53,5 @@ public interface AdminUserService {
      * @param id شناسه
      * @return خروجی: مدل ادمین حذف شده
      */
-    AdminUserModel delete(Integer id) throws Exception;
+    AdminUserModel delete(String id) throws Exception;
 }
