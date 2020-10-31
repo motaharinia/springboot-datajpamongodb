@@ -1,13 +1,8 @@
-## Spring Boot Data with JPA-Hibernate ORM and MongoDB Database
+## Spring Boot Data with MongoDB Database
 
-### Spring Data JPA:
-Spring Data JPA, part of the larger Spring Data family, makes it easy to easily implement JPA based repositories. This module deals with enhanced support for JPA based data access layers. It makes it easier to build Spring-powered applications that use data access technologies.
-
-### JPA (Java Persistence API):
-JPA is not a tool or framework; rather, it defines a set of concepts that can be implemented by any tool or framework. While JPA's object-relational mapping (ORM) model was originally based on Hibernate, it has since evolved. Likewise, while JPA was originally intended for use with relational/SQL databases, some JPA implementations have been extended for use with NoSQL datastores. A popular framework that supports JPA with NoSQL is EclipseLink,
-
-### Hibernate ORM:
-Hibernate ORM is an object-relational mapping tool for the Java programming language. It provides a framework for mapping an object-oriented domain model to a relational database
+### Spring Data:
+Spring Data’s mission is to provide a familiar and consistent, Spring-based programming model for data access while still retaining the special traits of the underlying data store.
+It makes it easy to use data access technologies, relational and non-relational databases, map-reduce frameworks, and cloud-based data services. This is an umbrella project which contains many subprojects that are specific to a given database. The projects are developed by working together with many of the companies and developers that are behind these exciting technologies.
 
 ### MongoDB Database:
 MongoDB is a cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with optional schemas. MongoDB is developed by MongoDB Inc. and licensed under the Server Side Public License.
@@ -46,7 +41,7 @@ As long as you use Mongo 2.x, you can specify a host/port as above.
 If you use the Mongo 3.0 Java driver, spring.data.mongodb.host and spring.data.mongodb.port are not supported. In such cases, spring.data.mongodb.uri should be used to provide all of the configuration.
 
 further references:     
-- https://spring.io/projects/spring-data-jpa
+- https://spring.io/projects/spring-data
 - https://bezkoder.com/spring-boot-mongodb-crud/
 - https://bezkoder.com/spring-boot-mongodb-pagination/
 - https://stackabuse.com/spring-data-mongodb-adminUser/
@@ -62,7 +57,7 @@ further references:
 ### Project Descriptions :
 please see application.properties files in resources folder and select a active profile "dev" or "com" to run project. you can check test methods too.  
 
-By default mongodb has no enabled access control.
+By default, mongodb has no enabled access control.
 - Download and install mongodb from "https://www.mongodb.com/try/download/community"
 - Go to Control Panel > System & Security > System > Advanced System Settings > Environment Variables > navigate to the Path variable hit Edit and add "C:\Program Files\MongoDB\Server\4.4\bin" to the end of Path
 - open cmd and run:

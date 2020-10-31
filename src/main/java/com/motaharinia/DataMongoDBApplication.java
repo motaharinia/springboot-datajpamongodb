@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = {"com.motaharinia"})
-public class DataJpaMongoDBApplication {
+public class DataMongoDBApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DataJpaMongoDBApplication.class, args);
+        SpringApplication.run(DataMongoDBApplication.class, args);
     }
 
 }

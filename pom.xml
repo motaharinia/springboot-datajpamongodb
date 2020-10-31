@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.motaharinia</groupId>
-    <artifactId>DataJpaMongoDB</artifactId>
+    <artifactId>DataMongoDB</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>DataJpaMongoDB</name>
-    <description>Motaharinia-Sample DataJpaMongoDB</description>
+    <name>DataMongoDB</name>
+    <description>Motaharinia-Sample DataMongoDB</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
